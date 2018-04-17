@@ -1,6 +1,5 @@
 package com.example
 
-import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
@@ -26,8 +25,6 @@ class FooControllerTests {
 		given(repository.foo()).willReturn("foo")
 		client.get().uri("/controller/foo").exchange()
 				.expectStatus().isOk
-				// TODO expectBody + KT-5464 workaround, see https://jira.spring.io/browse/SPR-15692?focusedCommentId=158700#comment-158700
-				// TODO Lack of suggestion of this extension, see https://youtrack.jetbrains.com/issue/KT-23834
-				.expectBody<String>().returnResult().apply { assertEquals("foo", responseBody) }
+				.expectBody<String>().isEqualTo("foo")
 	}
 }
