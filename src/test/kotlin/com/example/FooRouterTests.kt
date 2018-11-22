@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.test.web.reactive.server.*
+import org.springframework.test.web.reactive.server.expectBody
 
 @RunWith(SpringRunner::class)
 @WebFluxTest
@@ -32,4 +32,17 @@ class FooRouterTests {
 				.expectStatus().isOk
 				.expectBody<String>().isEqualTo("foo")
 	}
+
+    @Test
+    fun fooError() {
+        client
+                .get()
+                .uri("/router/foo/with/error")
+                .exchange()
+                .expectStatus().isNotFound
+                .expectBody()
+                .jsonPath("$.message")
+                .isEqualTo("No Foo found")
+    }
+
 }
