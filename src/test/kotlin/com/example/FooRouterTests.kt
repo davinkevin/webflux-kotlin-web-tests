@@ -4,6 +4,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration
+import org.springframework.boot.autoconfigure.web.reactive.error.ErrorWebFluxAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
@@ -14,6 +16,7 @@ import org.springframework.test.web.reactive.server.expectBody
 @RunWith(SpringRunner::class)
 @WebFluxTest
 @Import(FooRouter::class) // See https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-webflux-tests
+@ImportAutoConfiguration(ErrorWebFluxAutoConfiguration::class)
 class FooRouterTests {
 
 	@Autowired
