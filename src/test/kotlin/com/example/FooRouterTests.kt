@@ -1,5 +1,6 @@
 package com.example
 
+import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.BDDMockito.given
@@ -33,7 +34,7 @@ class FooRouterTests {
 				.uri("/router/foo")
 				.exchange()
 				.expectStatus().isOk
-				.expectBody<String>().isEqualTo("foo")
+                .expectBody<String>().returnResult().apply { assertEquals("foo", responseBody) }
 	}
 
     @Test
