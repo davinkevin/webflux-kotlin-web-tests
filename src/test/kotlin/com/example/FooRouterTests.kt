@@ -15,7 +15,7 @@ import org.springframework.test.web.reactive.server.expectBody
 
 @RunWith(SpringRunner::class)
 @WebFluxTest
-@Import(FooRouter::class) // See https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-webflux-tests
+@Import(value = [FooRouter::class, SecurityConfig::class])
 @ImportAutoConfiguration(ErrorWebFluxAutoConfiguration::class)
 class FooRouterTests {
 
